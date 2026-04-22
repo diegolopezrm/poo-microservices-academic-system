@@ -1,0 +1,38 @@
+# Maven
+
+target/
+_.jar
+!target/_.jar
+
+# IDE
+
+.idea/
+\*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Logs
+
+\*.log
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+# Git
+
+.git/
+.gitignore
+
+# Test reports
+
+surefire-reports/
+jacoco/
+
+# Documentation
+
+docs/
+\*.md

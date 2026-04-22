@@ -1,0 +1,252 @@
+@startuml class-diagram
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam classAttributeIconSize 0
+
+title Sistema Académico - Diagrama de Clases
+
+' ==================== MS-ESTUDIANTES ====================
+package "ms-estudiantes" #LightBlue {
+
+    enum StudentStatus {
+        ACTIVE
+        INACTIVE
+    }
+
+    class Student <<Entity>> {
+        - id: Long
+        - firstName: String
+        - lastName: String
+        - email: String
+        - status: StudentStatus
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        --
+        + isActive(): boolean
+        + activate(): void
+        + deactivate(): void
+    }
+
+    interface StudentRepository <<Repository>> {
+        + findByEmail(email: String): Optional<Student>
+        + existsByEmail(email: String): boolean
+    }
+
+    interface StudentService <<Service>> {
+        + createStudent(request): StudentResponse
+        + getStudentById(id): StudentResponse
+        + updateStatus(id, request): StudentResponse
+    }
+
+    class StudentServiceImpl {
+        - repository: StudentRepository
+        - mapper: StudentMapper
+        --
+        + createStudent(request): StudentResponse
+        + getStudentById(id): StudentResponse
+        + updateStatus(id, request): StudentResponse
+    }
+
+    class StudentController <<RestController>> {
+        - studentService: StudentService
+        --
+        + createStudent(request): ResponseEntity
+        + getStudentById(id): ResponseEntity
+        + updateStatus(id, request): ResponseEntity
+    }
+
+    StudentServiceImpl ..|> StudentService
+    StudentServiceImpl --> StudentRepository
+    StudentController --> StudentService
+    Student --> StudentStatus
+}
+
+' ==================== MS-CURSOS ====================
+package "ms-cursos" #LightGreen {
+
+    enum CourseStatus {
+        ACTIVE
+        INACTIVE
+    }
+
+    class Course <<Entity>> {
+        - id: Long
+        - name: String
+        - description: String
+        - capacity: Integer
+        - enrolledCount: Integer
+        - status: CourseStatus
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        --
+        + hasAvailableCapacity(): boolean
+        + getAvailableSpots(): int
+        + incrementEnrolled(): void
+        + decrementEnrolled(): void
+    }
+
+    interface CourseRepository <<Repository>> {
+        + findByName(name: String): Optional<Course>
+        + existsByName(name: String): boolean
+    }
+
+    interface CourseService <<Service>> {
+        + createCourse(request): CourseResponse
+        + getCourseById(id): CourseResponse
+        + updateStatus(id, request): CourseResponse
+        + updateCapacity(id, request): CourseResponse
+    }
+
+    class CourseServiceImpl {
+        - repository: CourseRepository
+        - mapper: CourseMapper
+    }
+
+    class CourseController <<RestController>> {
+        - courseService: CourseService
+    }
+
+    CourseServiceImpl ..|> CourseService
+    CourseServiceImpl --> CourseRepository
+    CourseController --> CourseService
+    Course --> CourseStatus
+}
+
+' ==================== MS-MATRICULAS ====================
+package "ms-matriculas" #LightYellow {
+
+    enum EnrollmentStatus {
+        ACTIVE
+        CANCELLED
+    }
+
+    class Enrollment <<Entity>> {
+        - id: Long
+        - studentId: Long
+        - courseId: Long
+        - status: EnrollmentStatus
+        - enrollmentDate: LocalDateTime
+        - createdAt: LocalDateTime
+        --
+        + cancel(): void
+        + isActive(): boolean
+    }
+
+    interface EnrollmentRepository <<Repository>> {
+        + findByStudentId(studentId): List<Enrollment>
+        + findByCourseId(courseId): List<Enrollment>
+        + existsByStudentIdAndCourseIdAndStatus(): boolean
+    }
+
+    ' === STRATEGY PATTERN ===
+    interface EnrollmentValidationStrategy <<Strategy>> {
+        + validate(request, student, course): void
+        + getOrder(): int
+    }
+
+    class StudentActiveValidation <<Strategy>> {
+        + validate(request, student, course): void
+        + getOrder(): int {return 1}
+    }
+
+    class CourseActiveValidation <<Strategy>> {
+        + validate(request, student, course): void
+        + getOrder(): int {return 2}
+    }
+
+    class CourseCapacityValidation <<Strategy>> {
+        + validate(request, student, course): void
+        + getOrder(): int {return 3}
+    }
+
+    class DuplicateEnrollmentValidation <<Strategy>> {
+        - repository: EnrollmentRepository
+        + validate(request, student, course): void
+        + getOrder(): int {return 4}
+    }
+
+    ' === TEMPLATE METHOD PATTERN ===
+    class EnrollmentServiceImpl <<TemplateMethod>> {
+        - repository: EnrollmentRepository
+        - studentClient: StudentServiceClient
+        - courseClient: CourseServiceClient
+        - validations: List<EnrollmentValidationStrategy>
+        --
+        + createEnrollment(request): EnrollmentResponse
+        # fetchStudentData(studentId): StudentResponse
+        # fetchCourseData(courseId): CourseResponse
+        # executeValidations(request, student, course): void
+        # createAndSaveEnrollment(request): Enrollment
+        # postProcessEnrollment(enrollment): void
+    }
+
+    class StudentServiceClient <<RestClient>> {
+        + getStudentById(id): StudentResponse
+    }
+
+    class CourseServiceClient <<RestClient>> {
+        + getCourseById(id): CourseResponse
+    }
+
+    ' Relaciones Strategy
+    StudentActiveValidation ..|> EnrollmentValidationStrategy
+    CourseActiveValidation ..|> EnrollmentValidationStrategy
+    CourseCapacityValidation ..|> EnrollmentValidationStrategy
+    DuplicateEnrollmentValidation ..|> EnrollmentValidationStrategy
+
+    EnrollmentServiceImpl --> EnrollmentRepository
+    EnrollmentServiceImpl --> StudentServiceClient
+    EnrollmentServiceImpl --> CourseServiceClient
+    EnrollmentServiceImpl o--> EnrollmentValidationStrategy : strategies
+
+    Enrollment --> EnrollmentStatus
+}
+
+' ==================== COMMON MODULE ====================
+package "common" #LightGray {
+
+    abstract class BaseException <<Exception>> {
+        # errorCode: String
+        # message: String
+        # details: Map<String, Object>
+        --
+        + getErrorCode(): String
+        + getDetails(): Map
+    }
+
+    class ResourceNotFoundException {
+        + {static} student(id): ResourceNotFoundException
+        + {static} course(id): ResourceNotFoundException
+        + {static} enrollment(id): ResourceNotFoundException
+    }
+
+    class BusinessException {
+        + {static} studentInactive(): BusinessException
+        + {static} courseInactive(): BusinessException
+        + {static} courseFull(): BusinessException
+    }
+
+    class ConflictException {
+        + {static} enrollmentConflict(): ConflictException
+        + {static} emailAlreadyExists(): ConflictException
+    }
+
+    class GlobalExceptionHandler <<ControllerAdvice>> {
+        + handleResourceNotFound(): ResponseEntity
+        + handleBusinessException(): ResponseEntity
+        + handleConflictException(): ResponseEntity
+    }
+
+    ResourceNotFoundException --|> BaseException
+    BusinessException --|> BaseException
+    ConflictException --|> BaseException
+    GlobalExceptionHandler ..> BaseException : handles
+}
+
+' Relaciones entre paquetes
+EnrollmentServiceImpl ..> StudentServiceClient : usa
+EnrollmentServiceImpl ..> CourseServiceClient : usa
+
+note "Principios SOLID Aplicados:\n\n• SRP: Cada clase una responsabilidad\n• OCP: Strategy permite extensión\n• LSP: Validaciones intercambiables\n• ISP: Interfaces específicas\n• DIP: Dependencias por abstracción" as N1
+
+@enduml

@@ -1,0 +1,454 @@
+{
+    "info": {
+        "_postman_id": "academic-system-collection",
+        "name": "Academic System - Microservices",
+        "description": "Colección de endpoints para el sistema académico de matrículas.\n\n## Microservicios\n- **MS Estudiantes** (Puerto 8081)\n- **MS Cursos** (Puerto 8082)\n- **MS Matrículas** (Puerto 8083)\n- **API Gateway** (Puerto 8080)\n\n## API Version: v1\n\n## Autores\nEstudiantes Universidad\n\n## Profesor\nAlejandro Riaño - Programación Orientada a Objetos",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "gateway_url",
+            "value": "http://localhost:8080"
+        },
+        {
+            "key": "estudiantes_url",
+            "value": "http://localhost:8081"
+        },
+        {
+            "key": "cursos_url",
+            "value": "http://localhost:8082"
+        },
+        {
+            "key": "matriculas_url",
+            "value": "http://localhost:8083"
+        }
+    ],
+    "item": [
+        {
+            "name": "Estudiantes",
+            "description": "Endpoints del microservicio de estudiantes",
+            "item": [
+                {
+                    "name": "Crear Estudiante",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"firstName\": \"Juan\",\n    \"lastName\": \"Pérez\",\n    \"email\": \"juan.perez@university.edu\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/students",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "students"
+                            ]
+                        },
+                        "description": "Crea un nuevo estudiante en el sistema"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Estudiante por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/students/1",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "students",
+                                "1"
+                            ]
+                        },
+                        "description": "Obtiene un estudiante específico por su ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Cambiar Estado de Estudiante (INACTIVE)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"INACTIVE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/students/1/status",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "students",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Cambia el estado de un estudiante (ACTIVE/INACTIVE)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Cambiar Estado de Estudiante (ACTIVE)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"ACTIVE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/students/1/status",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "students",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Reactiva un estudiante"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Cursos",
+            "description": "Endpoints del microservicio de cursos",
+            "item": [
+                {
+                    "name": "Crear Curso",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Programación Orientada a Objetos\",\n    \"description\": \"Curso de POO con Java 21 y Spring Boot\",\n    \"capacity\": 30\n}"
+                        },
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/courses",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "courses"
+                            ]
+                        },
+                        "description": "Crea un nuevo curso en el sistema"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Curso por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/courses/1",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "courses",
+                                "1"
+                            ]
+                        },
+                        "description": "Obtiene un curso específico por su ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Cambiar Estado de Curso",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"INACTIVE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/courses/1/status",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "courses",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Cambia el estado de un curso (ACTIVE/INACTIVE)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Capacidad de Curso",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"capacity\": 40\n}"
+                        },
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/courses/1/capacity",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "courses",
+                                "1",
+                                "capacity"
+                            ]
+                        },
+                        "description": "Actualiza la capacidad máxima de un curso"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Matrículas",
+            "description": "Endpoints del microservicio de matrículas",
+            "item": [
+                {
+                    "name": "Crear Matrícula",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"studentId\": 1,\n    \"courseId\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/enrollments",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "enrollments"
+                            ]
+                        },
+                        "description": "Crea una nueva matrícula (inscripción de estudiante en curso)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Matrícula por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/enrollments/1",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "enrollments",
+                                "1"
+                            ]
+                        },
+                        "description": "Obtiene una matrícula específica por su ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Buscar Matrículas por Estudiante",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/enrollments?studentId=1",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "enrollments"
+                            ],
+                            "query": [
+                                {
+                                    "key": "studentId",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        "description": "Lista todas las matrículas de un estudiante"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Buscar Matrículas por Curso",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{gateway_url}}/api/v1/enrollments?courseId=1",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "enrollments"
+                            ],
+                            "query": [
+                                {
+                                    "key": "courseId",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        "description": "Lista todas las matrículas de un curso"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Health Checks",
+            "description": "Endpoints de salud de los microservicios",
+            "item": [
+                {
+                    "name": "Health - Gateway",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{gateway_url}}/actuator/health",
+                            "host": [
+                                "{{gateway_url}}"
+                            ],
+                            "path": [
+                                "actuator",
+                                "health"
+                            ]
+                        },
+                        "description": "Verifica el estado del API Gateway"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Health - Estudiantes",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{estudiantes_url}}/actuator/health",
+                            "host": [
+                                "{{estudiantes_url}}"
+                            ],
+                            "path": [
+                                "actuator",
+                                "health"
+                            ]
+                        },
+                        "description": "Verifica el estado del MS Estudiantes"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Health - Cursos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{cursos_url}}/actuator/health",
+                            "host": [
+                                "{{cursos_url}}"
+                            ],
+                            "path": [
+                                "actuator",
+                                "health"
+                            ]
+                        },
+                        "description": "Verifica el estado del MS Cursos"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Health - Matrículas",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{matriculas_url}}/actuator/health",
+                            "host": [
+                                "{{matriculas_url}}"
+                            ],
+                            "path": [
+                                "actuator",
+                                "health"
+                            ]
+                        },
+                        "description": "Verifica el estado del MS Matrículas"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}

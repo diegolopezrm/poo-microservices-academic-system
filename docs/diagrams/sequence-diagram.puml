@@ -1,0 +1,127 @@
+@startuml sequence-diagram
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam sequenceMessageAlign center
+
+title Diagrama de Secuencia - Crear Matrícula (Enrollment)
+
+actor Cliente as C
+participant "API Gateway\n:8080" as GW
+participant "EnrollmentController\n:8083" as EC
+participant "EnrollmentService" as ES
+participant "StudentServiceClient" as SSC
+participant "MS-Estudiantes\n:8081" as MSE
+participant "CourseServiceClient" as CSC
+participant "MS-Cursos\n:8082" as MSC
+participant "ValidationStrategies" as VS
+participant "EnrollmentRepository" as ER
+database "H2 DB" as DB
+
+== Flujo Principal: Crear Matrícula ==
+
+C -> GW : POST /api/v1/enrollments\n{studentId: 1, courseId: 1}
+activate GW
+
+GW -> GW : CorrelationIdFilter\n(genera X-Correlation-Id)
+GW -> GW : LoggingFilter\n(log request)
+
+GW -> EC : route to /api/v1/enrollments
+activate EC
+
+EC -> ES : createEnrollment(request)
+activate ES
+
+note over ES : **Template Method Pattern**\nPasos definidos en orden
+
+== Paso 1: Obtener Datos del Estudiante ==
+
+ES -> SSC : getStudentById(1)
+activate SSC
+SSC -> MSE : GET /api/v1/students/1
+activate MSE
+MSE --> SSC : StudentResponse\n{id:1, status:"ACTIVE"}
+deactivate MSE
+SSC --> ES : StudentResponse
+deactivate SSC
+
+== Paso 2: Obtener Datos del Curso ==
+
+ES -> CSC : getCourseById(1)
+activate CSC
+CSC -> MSC : GET /api/v1/courses/1
+activate MSC
+MSC --> CSC : CourseResponse\n{id:1, status:"ACTIVE", capacity:30, enrolled:5}
+deactivate MSC
+CSC --> ES : CourseResponse
+deactivate CSC
+
+== Paso 3: Ejecutar Validaciones (Strategy Pattern) ==
+
+ES -> VS : executeValidations(request, student, course)
+activate VS
+
+note over VS : **Strategy Pattern**\nValidaciones ordenadas por prioridad
+
+VS -> VS : 1. StudentActiveValidation\n   ¿student.status == ACTIVE?
+VS -> VS : 2. CourseActiveValidation\n   ¿course.status == ACTIVE?
+VS -> VS : 3. CourseCapacityValidation\n   ¿enrolled < capacity?
+VS -> ER : 4. DuplicateEnrollmentValidation\n   existsByStudentAndCourse()
+activate ER
+ER -> DB : SELECT ...
+DB --> ER : false (no existe)
+ER --> VS : false
+deactivate ER
+
+VS --> ES : validaciones OK
+deactivate VS
+
+== Paso 4: Crear y Guardar Matrícula ==
+
+ES -> ER : save(enrollment)
+activate ER
+ER -> DB : INSERT INTO enrollments...
+DB --> ER : enrollment saved
+ER --> ES : Enrollment{id:1, status:ACTIVE}
+deactivate ER
+
+== Paso 5: Post-Procesamiento ==
+
+ES -> ES : postProcessEnrollment()\n(notificaciones futuras)
+
+ES --> EC : EnrollmentResponse
+deactivate ES
+
+EC --> GW : ResponseEntity<201 CREATED>
+deactivate EC
+
+GW -> GW : LoggingFilter\n(log response)
+
+GW --> C : 201 Created\n{id:1, studentId:1, courseId:1, status:"ACTIVE"}
+deactivate GW
+
+== Flujo Alternativo: Estudiante Inactivo ==
+
+C -> GW : POST /api/v1/enrollments
+activate GW
+GW -> EC : route
+activate EC
+EC -> ES : createEnrollment(request)
+activate ES
+ES -> SSC : getStudentById(1)
+SSC -> MSE : GET /api/v1/students/1
+MSE --> SSC : {status:"INACTIVE"}
+SSC --> ES : StudentResponse
+
+ES -> VS : executeValidations()
+activate VS
+VS -> VS : StudentActiveValidation
+VS --> ES : throw BusinessException\n("STUDENT_INACTIVE")
+deactivate VS
+deactivate ES
+
+EC --> GW : 422 Unprocessable Entity\n{errorCode:"STUDENT_INACTIVE"}
+deactivate EC
+GW --> C : 422 Error
+deactivate GW
+
+@enduml

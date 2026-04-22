@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">README</h1>
+</header>
+<h1 id="sistema-de-gestión-académica---microservicios">🎓 Sistema de
+Gestión Académica - Microservicios</h1>
+<p align="center">
+<img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21"/>
+<img src="https://img.shields.io/badge/Spring%20Boot-3.2.3-brightgreen?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Boot"/>
+<img src="https://img.shields.io/badge/Spring%20Cloud-2023.0.0-brightgreen?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Cloud"/>
+<img src="https://img.shields.io/badge/Maven-3.9+-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white" alt="Maven"/>
+<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License"/>
+</p>
+<p align="center">
+<b>Sistema académico distribuido que demuestra dominio de POO,
+principios SOLID, patrones de diseño y arquitectura de
+microservicios.</b>
+</p>
+<hr />
+<h2 id="tabla-de-contenidos">📋 Tabla de Contenidos</h2>
+<ul>
+<li><a href="#-descripción-del-proyecto">Descripción del
+Proyecto</a></li>
+<li><a href="#-arquitectura">Arquitectura</a></li>
+<li><a href="#-estructura-del-proyecto">Estructura del Proyecto</a></li>
+<li><a href="#-tecnologías">Tecnologías</a></li>
+<li><a href="#-patrones-de-diseño">Patrones de Diseño</a></li>
+<li><a href="#-principios-solid">Principios SOLID</a></li>
+<li><a href="#-requisitos-previos">Requisitos Previos</a></li>
+<li><a href="#-instalación">Instalación</a></li>
+<li><a href="#-ejecución">Ejecución</a></li>
+<li><a href="#-api-endpoints">API Endpoints</a></li>
+<li><a href="#-testing">Testing</a></li>
+<li><a href="#-frontend">Frontend</a></li>
+<li><a href="#-docker">Docker</a></li>
+<li><a href="#-documentación">Documentación</a></li>
+<li><a href="#-autores">Autores</a></li>
+</ul>
+<hr />
+<h2 id="descripción-del-proyecto">📖 Descripción del Proyecto</h2>
+<p>Este proyecto implementa un <strong>Sistema de Gestión
+Académica</strong> utilizando una arquitectura de
+<strong>microservicios</strong>. El sistema permite gestionar:</p>
+<ul>
+<li><strong>Estudiantes</strong>: Registro, consulta y gestión de
+estados (ACTIVE, INACTIVE, GRADUATED, SUSPENDED)</li>
+<li><strong>Cursos</strong>: Creación y administración de cursos
+académicos con capacidad limitada</li>
+<li><strong>Matrículas</strong>: Inscripción de estudiantes en cursos
+con validaciones de negocio</li>
+</ul>
+<h3 id="características-principales">Características Principales</h3>
+<ul>
+<li>✅ Arquitectura de microservicios con <strong>Spring Cloud
+Gateway</strong></li>
+<li>✅ Comunicación síncrona entre servicios vía
+<strong>REST</strong></li>
+<li>✅ Patrones de diseño: <strong>Strategy</strong> y <strong>Template
+Method</strong></li>
+<li>✅ Aplicación de principios <strong>SOLID</strong></li>
+<li>✅ Base de datos <strong>H2</strong> en memoria por servicio</li>
+<li>✅ <strong>36 tests</strong> (19 unitarios + 17 de integración)</li>
+<li>✅ Colección <strong>Postman</strong> con 12 requests</li>
+<li>✅ Documentación con <strong>diagramas UML</strong> (PlantUML)</li>
+<li>✅ Frontend de ejemplo con <strong>React + Vite + Tailwind
+CSS</strong></li>
+<li>✅ Configuración <strong>Docker</strong> lista para despliegue</li>
+<li>✅ Scripts de gestión para iniciar/detener servicios</li>
+</ul>
+<hr />
+<h2 id="arquitectura">🏗️ Arquitectura</h2>
+<h3 id="diagrama-de-arquitectura">Diagrama de Arquitectura</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                              CLIENTES                                        │
+│                     (Navegador / Postman / Frontend React)                   │
+└───────────────────────────────────┬─────────────────────────────────────────┘
+                                    │ HTTP
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          API GATEWAY (:8080)                                 │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │  • Punto de entrada único                                            │    │
+│  │  • Enrutamiento inteligente                                          │    │
+│  │  • Correlation-ID para trazabilidad                                  │    │
+│  │  • Logging centralizado                                              │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
+└───────────────────────────────────┬─────────────────────────────────────────┘
+                                    │
+          ┌─────────────────────────┼─────────────────────────┐
+          │                         │                         │
+          ▼                         ▼                         ▼
+┌─────────────────────┐   ┌─────────────────────┐   ┌─────────────────────┐
+│  MS-ESTUDIANTES     │   │     MS-CURSOS       │   │   MS-MATRICULAS     │
+│      (:8081)        │   │      (:8082)        │   │      (:8083)        │
+│                     │   │                     │   │                     │
+│  ┌───────────────┐  │   │  ┌───────────────┐  │   │  ┌───────────────┐  │
+│  │  Controller   │  │   │  │  Controller   │  │   │  │  Controller   │  │
+│  ├───────────────┤  │   │  ├───────────────┤  │   │  ├───────────────┤  │
+│  │   Service     │  │   │  │   Service     │  │   │  │   Service     │◄─┼──┐
+│  ├───────────────┤  │   │  ├───────────────┤  │   │  ├───────────────┤  │  │
+│  │  Repository   │  │   │  │  Repository   │  │   │  │  Repository   │  │  │
+│  ├───────────────┤  │   │  ├───────────────┤  │   │  ├───────────────┤  │  │
+│  │   H2 (mem)    │  │   │  │   H2 (mem)    │  │   │  │   H2 (mem)    │  │  │
+│  └───────────────┘  │   │  └───────────────┘  │   │  └───────────────┘  │  │
+└─────────────────────┘   └─────────────────────┘   └──────────┬──────────┘  │
+          ▲                         ▲                          │             │
+          │                         │                          │             │
+          └─────────────────────────┴──────────────────────────┘             │
+                        REST Client (Validación de datos)                     │
+                                                                              │
+                    ┌─────────────────────────────────────────────────────────┘
+                    │  MS-Matriculas consulta MS-Estudiantes y MS-Cursos
+                    │  para validar antes de crear una matrícula
+                    └─────────────────────────────────────────────────────────</code></pre>
+<h3 id="tabla-de-microservicios">Tabla de Microservicios</h3>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 17%" />
+<col style="width: 32%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Puerto</th>
+<th>Base de Datos</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>api-gateway</strong></td>
+<td>8080</td>
+<td>-</td>
+<td>Punto de entrada único, enrutamiento y correlation-ID</td>
+</tr>
+<tr>
+<td><strong>ms-estudiantes</strong></td>
+<td>8081</td>
+<td><code>jdbc:h2:mem:estudiantesdb</code></td>
+<td>CRUD de estudiantes y gestión de estados</td>
+</tr>
+<tr>
+<td><strong>ms-cursos</strong></td>
+<td>8082</td>
+<td><code>jdbc:h2:mem:cursosdb</code></td>
+<td>CRUD de cursos académicos</td>
+</tr>
+<tr>
+<td><strong>ms-matriculas</strong></td>
+<td>8083</td>
+<td><code>jdbc:h2:mem:matriculasdb</code></td>
+<td>Orquestador de matrículas con validaciones</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comunicación-entre-servicios">Comunicación entre Servicios</h3>
+<pre><code>┌─────────────────┐                    ┌───────────────────┐
+│  MS-MATRICULAS  │ ───── GET ───────▶ │  MS-ESTUDIANTES   │
+│                 │      /students/{id} │   Valida estado   │
+│   (Orquestador) │                    └───────────────────┘
+│                 │                    ┌───────────────────┐
+│                 │ ───── GET ───────▶ │    MS-CURSOS      │
+│                 │      /courses/{id}  │ Valida capacidad  │
+└─────────────────┘                    └───────────────────┘</code></pre>
+<hr />
+<h2 id="estructura-del-proyecto">📁 Estructura del Proyecto</h2>
+<pre><code>poo-project/
+│
+├── 📄 pom.xml                         # POM padre (Maven multi-módulo)
+├── 📄 README.md                       # Este archivo
+├── 📄 PLANNING.md                     # Documento de planificación
+├── 📄 docker-compose.yml              # Orquestación Docker
+├── 📄 .dockerignore                   # Archivos ignorados por Docker
+│
+├── 📂 common/                         # Módulo común compartido
+│   ├── pom.xml
+│   └── src/main/java/com/academic/common/
+│       ├── dto/                       # DTOs compartidos
+│       ├── exception/                 # Excepciones base
+│       └── util/                      # Utilidades comunes
+│
+├── 📂 api-gateway/                    # API Gateway (Spring Cloud Gateway)
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── src/main/
+│       ├── java/com/academic/gateway/
+│       │   ├── GatewayApplication.java
+│       │   ├── config/                # Configuración del Gateway
+│       │   └── filter/                # Filtros personalizados
+│       └── resources/
+│           └── application.yml        # Rutas y configuración
+│
+├── 📂 ms-estudiantes/                 # Microservicio de Estudiantes
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── src/
+│       ├── main/java/com/academic/estudiantes/
+│       │   ├── EstudiantesApplication.java
+│       │   ├── controller/            # REST Controllers
+│       │   ├── service/               # Lógica de negocio
+│       │   ├── repository/            # Spring Data JPA
+│       │   ├── domain/
+│       │   │   ├── entity/            # Entidades JPA
+│       │   │   ├── dto/               # Request/Response DTOs
+│       │   │   └── enums/             # Enumeraciones
+│       │   ├── mapper/                # MapStruct mappers
+│       │   └── config/                # Configuraciones
+│       └── test/                      # Tests unitarios e integración
+│
+├── 📂 ms-cursos/                      # Microservicio de Cursos
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── src/                           # (Estructura similar a ms-estudiantes)
+│
+├── 📂 ms-matriculas/                  # Microservicio de Matrículas
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── src/main/java/com/academic/matriculas/
+│       ├── MatriculasApplication.java
+│       ├── controller/
+│       ├── service/
+│       │   └── impl/
+│       │       └── EnrollmentServiceImpl.java  # Template Method
+│       ├── repository/
+│       ├── domain/
+│       ├── mapper/
+│       ├── client/                    # REST Clients (Feign-like)
+│       │   ├── StudentServiceClient.java
+│       │   └── CourseServiceClient.java
+│       ├── validation/                # Patrón Strategy
+│       │   ├── EnrollmentValidationStrategy.java
+│       │   └── impl/
+│       │       ├── StudentActiveValidation.java
+│       │       ├── CourseActiveValidation.java
+│       │       ├── CourseCapacityValidation.java
+│       │       └── DuplicateEnrollmentValidation.java
+│       └── config/
+│
+├── 📂 frontend-example/               # Frontend React (opcional)
+│   ├── package.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── App.jsx
+│       ├── api/index.js               # Cliente API
+│       └── components/
+│           ├── Students.jsx
+│           ├── Courses.jsx
+│           └── Enrollments.jsx
+│
+├── 📂 docs/                           # Documentación
+│   ├── DESIGN.md                      # Documento de diseño técnico
+│   ├── SUSTENTACION.md                # Guía de sustentación
+│   ├── diagrams/
+│   │   ├── architecture.puml          # Diagrama de arquitectura
+│   │   ├── class-diagram.puml         # Diagrama de clases
+│   │   ├── sequence-diagram.puml      # Diagrama de secuencia
+│   │   └── output/                    # PNGs generados
+│   ├── postman/
+│   │   └── academic-system.postman_collection.json
+│   └── pdf/                           # Documentación HTML exportada
+│
+├── 📂 logs/                           # Logs de los microservicios
+│
+└── 📜 Scripts de gestión
+    ├── start-all.sh                   # Iniciar todos los servicios
+    ├── stop-all.sh                    # Detener todos los servicios
+    ├── restart-all.sh                 # Reiniciar todos los servicios
+    └── status.sh                      # Ver estado de los servicios</code></pre>
+<hr />
+<h2 id="tecnologías">🛠️ Tecnologías</h2>
+<h3 id="backend">Backend</h3>
+<table>
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Versión</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Java</strong></td>
+<td>21 LTS</td>
+<td>Lenguaje principal</td>
+</tr>
+<tr>
+<td><strong>Spring Boot</strong></td>
+<td>3.2.3</td>
+<td>Framework base</td>
+</tr>
+<tr>
+<td><strong>Spring Cloud Gateway</strong></td>
+<td>2023.0.0</td>
+<td>API Gateway reactivo</td>
+</tr>
+<tr>
+<td><strong>Spring Data JPA</strong></td>
+<td>3.2.x</td>
+<td>Persistencia ORM</td>
+</tr>
+<tr>
+<td><strong>Spring Validation</strong></td>
+<td>3.2.x</td>
+<td>Validación de DTOs</td>
+</tr>
+<tr>
+<td><strong>Spring Actuator</strong></td>
+<td>3.2.x</td>
+<td>Health checks y métricas</td>
+</tr>
+<tr>
+<td><strong>H2 Database</strong></td>
+<td>2.2.x</td>
+<td>Base de datos en memoria</td>
+</tr>
+<tr>
+<td><strong>MapStruct</strong></td>
+<td>1.5.5</td>
+<td>Mapeo Entity ↔︎ DTO</td>
+</tr>
+<tr>
+<td><strong>Lombok</strong></td>
+<td>1.18.x</td>
+<td>Reducción de boilerplate</td>
+</tr>
+<tr>
+<td><strong>Maven</strong></td>
+<td>3.9+</td>
+<td>Gestión de dependencias</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing">Testing</h3>
+<table>
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JUnit 5</strong></td>
+<td>Framework de testing</td>
+</tr>
+<tr>
+<td><strong>Mockito</strong></td>
+<td>Mocking de dependencias</td>
+</tr>
+<tr>
+<td><strong>Spring Boot Test</strong></td>
+<td>Testing de integración</td>
+</tr>
+<tr>
+<td><strong>JaCoCo</strong></td>
+<td>Cobertura de código</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frontend-opcional">Frontend (Opcional)</h3>
+<table>
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Versión</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>React</strong></td>
+<td>18.x</td>
+<td>Librería UI</td>
+</tr>
+<tr>
+<td><strong>Vite</strong></td>
+<td>7.3.1</td>
+<td>Build tool</td>
+</tr>
+<tr>
+<td><strong>Tailwind CSS</strong></td>
+<td>3.x</td>
+<td>Estilos utilitarios</td>
+</tr>
+</tbody>
+</table>
+<h3 id="devops">DevOps</h3>
+<table>
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Contenedorización</td>
+</tr>
+<tr>
+<td><strong>Docker Compose</strong></td>
+<td>Orquestación local</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="patrones-de-diseño">🎨 Patrones de Diseño</h2>
+<h3 id="strategy-pattern-patrón-estrategia">1. Strategy Pattern (Patrón
+Estrategia)</h3>
+<p><strong>Ubicación:</strong>
+<code>ms-matriculas/src/main/java/com/academic/matriculas/validation/</code></p>
+<p>El patrón Strategy se utiliza para las <strong>validaciones de
+matrícula</strong>. Cada regla de negocio está encapsulada en su propia
+clase, permitiendo agregar o modificar validaciones sin alterar el
+código existente.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Interfaz Strategy</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> EnrollmentValidationStrategy <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">validate</span><span class="op">(</span>EnrollmentCreateRequest request<span class="op">,</span> StudentDTO student<span class="op">,</span> CourseDTO course<span class="op">);</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Implementaciones concretas</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>├── StudentActiveValidation<span class="op">.</span><span class="fu">java</span>      <span class="co">// Valida que el estudiante esté activo</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>├── CourseActiveValidation<span class="op">.</span><span class="fu">java</span>       <span class="co">// Valida que el curso esté activo</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>├── CourseCapacityValidation<span class="op">.</span><span class="fu">java</span>     <span class="co">// Valida que haya cupos disponibles</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>└── DuplicateEnrollmentValidation<span class="op">.</span><span class="fu">java</span> <span class="co">// Valida que no exista matrícula duplicada</span></span></code></pre></div>
+<p><strong>Diagrama:</strong></p>
+<pre><code>          ┌──────────────────────────────┐
+          │ EnrollmentValidationStrategy │ ◄─── Interface
+          │         &lt;&lt;interface&gt;&gt;        │
+          └──────────────────────────────┘
+                        ▲
+                        │ implements
+        ┌───────────────┼───────────────┬───────────────┐
+        │               │               │               │
+┌───────┴───────┐ ┌─────┴─────┐ ┌───────┴───────┐ ┌─────┴─────┐
+│StudentActive  │ │CourseActive│ │CourseCapacity│ │Duplicate  │
+│  Validation   │ │ Validation │ │  Validation  │ │ Enrollment│
+└───────────────┘ └───────────┘ └──────────────┘ └───────────┘</code></pre>
+<p><strong>Uso en el servicio:</strong></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Service</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> EnrollmentServiceImpl <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">List</span><span class="op">&lt;</span>EnrollmentValidationStrategy<span class="op">&gt;</span> validationStrategies<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">executeValidations</span><span class="op">(</span>EnrollmentCreateRequest request<span class="op">,</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                    StudentDTO student<span class="op">,</span> CourseDTO course<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>EnrollmentValidationStrategy strategy <span class="op">:</span> validationStrategies<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>            strategy<span class="op">.</span><span class="fu">validate</span><span class="op">(</span>request<span class="op">,</span> student<span class="op">,</span> course<span class="op">);</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="template-method-pattern-patrón-método-plantilla">2. Template
+Method Pattern (Patrón Método Plantilla)</h3>
+<p><strong>Ubicación:</strong>
+<code>ms-matriculas/src/main/java/com/academic/matriculas/service/impl/EnrollmentServiceImpl.java</code></p>
+<p>El patrón Template Method define el <strong>esqueleto del
+algoritmo</strong> para crear una matrícula. Los pasos están definidos
+en orden y algunos pueden ser sobrescritos por subclases.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> Template Method para crear matr<span class="co">í</span>cula<span class="co">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">1. </span>Obtener datos de servicios externos</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">2.</span> Ejecutar validaciones <span class="co">(</span>Strategy Pattern<span class="co">)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">3.</span> Crear la matr<span class="co">í</span>cula</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a> <span class="co">*</span> <span class="co">4.</span> Post<span class="co">-</span>procesamiento</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> <span class="co">*/</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">@Override</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">@Transactional</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> EnrollmentResponse <span class="fu">createEnrollment</span><span class="op">(</span>EnrollmentCreateRequest request<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Step 1: Obtener datos de servicios externos</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    StudentDTO student <span class="op">=</span> <span class="fu">fetchStudentData</span><span class="op">(</span>request<span class="op">.</span><span class="fu">getStudentId</span><span class="op">());</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    CourseDTO course <span class="op">=</span> <span class="fu">fetchCourseData</span><span class="op">(</span>request<span class="op">.</span><span class="fu">getCourseId</span><span class="op">());</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Step 2: Ejecutar validaciones ordenadas (Strategy Pattern)</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">executeValidations</span><span class="op">(</span>request<span class="op">,</span> student<span class="op">,</span> course<span class="op">);</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Step 3: Crear y persistir la matrícula</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    Enrollment enrollment <span class="op">=</span> <span class="fu">createAndSaveEnrollment</span><span class="op">(</span>request<span class="op">);</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Step 4: Post-procesamiento (logging, eventos, etc.)</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">postProcessEnrollment</span><span class="op">(</span>enrollment<span class="op">,</span> student<span class="op">,</span> course<span class="op">);</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> enrollmentMapper<span class="op">.</span><span class="fu">toResponse</span><span class="op">(</span>enrollment<span class="op">);</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Diagrama de Secuencia:</strong></p>
+<pre><code>Client          Controller        Service           Clients          Repository
+  │                 │                │                  │                 │
+  │ POST /enrollments               │                  │                 │
+  │────────────────▶│                │                  │                 │
+  │                 │ createEnrollment                 │                 │
+  │                 │───────────────▶│                  │                 │
+  │                 │                │                  │                 │
+  │                 │                │ Step 1: fetchStudentData          │
+  │                 │                │─────────────────▶│                 │
+  │                 │                │◀─────────────────│                 │
+  │                 │                │                  │                 │
+  │                 │                │ Step 1: fetchCourseData           │
+  │                 │                │─────────────────▶│                 │
+  │                 │                │◀─────────────────│                 │
+  │                 │                │                  │                 │
+  │                 │                │ Step 2: executeValidations()      │
+  │                 │                │ (Strategy Pattern - 4 validaciones)
+  │                 │                │                  │                 │
+  │                 │                │ Step 3: createAndSaveEnrollment   │
+  │                 │                │────────────────────────────────────▶
+  │                 │                │◀────────────────────────────────────
+  │                 │                │                  │                 │
+  │                 │                │ Step 4: postProcessEnrollment     │
+  │                 │                │                  │                 │
+  │                 │◀───────────────│                  │                 │
+  │◀────────────────│                │                  │                 │
+  │  201 Created     │                │                  │                 │</code></pre>
+<hr />
+<h2 id="principios-solid">🔷 Principios SOLID</h2>
+<h3 id="s---single-responsibility-principle-srp">S - Single
+Responsibility Principle (SRP)</h3>
+<blockquote>
+<p>“Una clase debe tener una única razón para cambiar”</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Responsabilidad Única</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Controller</code></td>
+<td>Manejar requests/responses HTTP</td>
+</tr>
+<tr>
+<td><code>Service</code></td>
+<td>Lógica de negocio</td>
+</tr>
+<tr>
+<td><code>Repository</code></td>
+<td>Acceso a datos</td>
+</tr>
+<tr>
+<td><code>Mapper</code></td>
+<td>Transformación Entity ↔︎ DTO</td>
+</tr>
+<tr>
+<td><code>ValidationStrategy</code></td>
+<td>Una única regla de validación</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo:</strong></p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Cada estrategia tiene UNA sola responsabilidad</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> StudentActiveValidation <span class="kw">implements</span> EnrollmentValidationStrategy <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">validate</span><span class="op">(</span><span class="kw">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// SOLO valida que el estudiante esté activo</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>student<span class="op">.</span><span class="fu">getStatus</span><span class="op">()</span> <span class="op">!=</span> StudentStatus<span class="op">.</span><span class="fu">ACTIVE</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">throw</span> <span class="kw">new</span> <span class="fu">BusinessException</span><span class="op">(</span><span class="st">&quot;Student is not active&quot;</span><span class="op">);</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="o---openclosed-principle-ocp">O - Open/Closed Principle
+(OCP)</h3>
+<blockquote>
+<p>“Abierto para extensión, cerrado para modificación”</p>
+</blockquote>
+<p>Para agregar una nueva validación de matrícula:</p>
+<ol type="1">
+<li>Crear nueva clase que implemente
+<code>EnrollmentValidationStrategy</code></li>
+<li>Anotarla con <code>@Component</code> y <code>@Order(n)</code></li>
+<li><strong>NO se modifica</strong> código existente</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nueva validación sin modificar código existente</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">@Component</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">@Order</span><span class="op">(</span><span class="dv">5</span><span class="op">)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> PrerequisiteValidation <span class="kw">implements</span> EnrollmentValidationStrategy <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">validate</span><span class="op">(</span><span class="kw">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Nueva lógica de prerrequisitos</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="l---liskov-substitution-principle-lsp">L - Liskov Substitution
+Principle (LSP)</h3>
+<blockquote>
+<p>“Los objetos de una superclase deben poder ser reemplazados por
+objetos de sus subclases”</p>
+</blockquote>
+<p>Todas las implementaciones de
+<code>EnrollmentValidationStrategy</code> son
+<strong>intercambiables</strong>:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// El servicio no sabe qué implementación específica está usando</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="dt">final</span> <span class="bu">List</span><span class="op">&lt;</span>EnrollmentValidationStrategy<span class="op">&gt;</span> validationStrategies<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>EnrollmentValidationStrategy strategy <span class="op">:</span> validationStrategies<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    strategy<span class="op">.</span><span class="fu">validate</span><span class="op">(</span>request<span class="op">,</span> student<span class="op">,</span> course<span class="op">);</span>  <span class="co">// Polimorfismo</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="i---interface-segregation-principle-isp">I - Interface
+Segregation Principle (ISP)</h3>
+<blockquote>
+<p>“Los clientes no deben depender de interfaces que no usan”</p>
+</blockquote>
+<p>Las interfaces están segregadas por dominio:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Interfaces específicas por dominio</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> StudentService <span class="op">{</span> <span class="kw">...</span> <span class="op">}</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> CourseService <span class="op">{</span> <span class="kw">...</span> <span class="op">}</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> EnrollmentService <span class="op">{</span> <span class="kw">...</span> <span class="op">}</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> EnrollmentValidationStrategy <span class="op">{</span> <span class="kw">...</span> <span class="op">}</span>  <span class="co">// Solo un método</span></span></code></pre></div>
+<h3 id="d---dependency-inversion-principle-dip">D - Dependency Inversion
+Principle (DIP)</h3>
+<blockquote>
+<p>“Depende de abstracciones, no de implementaciones”</p>
+</blockquote>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Service</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> EnrollmentServiceImpl <span class="kw">implements</span> EnrollmentService <span class="op">{</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Depende de la INTERFAZ, no de implementaciones concretas</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">List</span><span class="op">&lt;</span>EnrollmentValidationStrategy<span class="op">&gt;</span> validationStrategies<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> StudentServiceClient studentServiceClient<span class="op">;</span>  <span class="co">// Interface</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">final</span> CourseServiceClient courseServiceClient<span class="op">;</span>    <span class="co">// Interface</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Spring inyecta las implementaciones automáticamente</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="requisitos-previos">📋 Requisitos Previos</h2>
+<h3 id="software-requerido">Software Requerido</h3>
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th>Versión Mínima</th>
+<th>Verificar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JDK</strong></td>
+<td>21</td>
+<td><code>java --version</code></td>
+</tr>
+<tr>
+<td><strong>Maven</strong></td>
+<td>3.9.x</td>
+<td><code>mvn --version</code></td>
+</tr>
+<tr>
+<td><strong>Git</strong></td>
+<td>2.x</td>
+<td><code>git --version</code></td>
+</tr>
+<tr>
+<td><strong>Node.js</strong> (opcional)</td>
+<td>18.x</td>
+<td><code>node --version</code></td>
+</tr>
+<tr>
+<td><strong>Docker</strong> (opcional)</td>
+<td>20.x</td>
+<td><code>docker --version</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="verificar-instalación">Verificar Instalación</h3>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Java</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">--version</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># openjdk 21.0.x 2024-xx-xx LTS</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Maven</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> <span class="at">--version</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Apache Maven 3.9.x</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Git</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># git version 2.x.x</span></span></code></pre></div>
+<hr />
+<h2 id="instalación">📥 Instalación</h2>
+<h3 id="clonar-el-repositorio">1. Clonar el Repositorio</h3>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>url-repositorio<span class="op">&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> poo-project</span></code></pre></div>
+<h3 id="compilar-el-proyecto">2. Compilar el Proyecto</h3>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compilar todos los módulos (incluye tests)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean install</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># O sin tests (más rápido)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean install <span class="at">-DskipTests</span></span></code></pre></div>
+<h3 id="verificar-compilación">3. Verificar Compilación</h3>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Debe mostrar BUILD SUCCESS para los 5 módulos</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[INFO]</span> Reactor Summary:</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[INFO]</span> Academic System <span class="at">-</span> Parent .......................... SUCCESS</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[INFO]</span> common ............................................ SUCCESS</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[INFO]</span> ms-estudiantes .................................... SUCCESS</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[INFO]</span> ms-cursos ......................................... SUCCESS</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[INFO]</span> ms-matriculas ..................................... SUCCESS</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[INFO]</span> api-gateway ....................................... SUCCESS</span></code></pre></div>
+<hr />
+<h2 id="ejecución">🚀 Ejecución</h2>
+<h3 id="opción-1-scripts-de-gestión-recomendado">Opción 1: Scripts de
+Gestión (Recomendado)</h3>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dar permisos de ejecución (solo primera vez)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x <span class="pp">*</span>.sh</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Iniciar todos los servicios</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./start-all.sh</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver estado de los servicios</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="ex">./status.sh</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Detener todos los servicios</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./stop-all.sh</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Reiniciar todos los servicios</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="ex">./restart-all.sh</span></span></code></pre></div>
+<h3 id="opción-2-ejecución-manual">Opción 2: Ejecución Manual</h3>
+<p>Abrir 4 terminales y ejecutar en cada una:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Terminal 1 - MS Estudiantes</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ms-estudiantes <span class="kw">&amp;&amp;</span> <span class="ex">mvn</span> spring-boot:run</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Terminal 2 - MS Cursos</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ms-cursos <span class="kw">&amp;&amp;</span> <span class="ex">mvn</span> spring-boot:run</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Terminal 3 - MS Matrículas</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ms-matriculas <span class="kw">&amp;&amp;</span> <span class="ex">mvn</span> spring-boot:run</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Terminal 4 - API Gateway</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> api-gateway <span class="kw">&amp;&amp;</span> <span class="ex">mvn</span> spring-boot:run</span></code></pre></div>
+<h3 id="opción-3-docker-compose">Opción 3: Docker Compose</h3>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construir imágenes y levantar contenedores</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">--build</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># En segundo plano</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">-d</span> <span class="at">--build</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Detener</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> down</span></code></pre></div>
+<h3 id="verificar-que-los-servicios-están-corriendo">Verificar que los
+Servicios están Corriendo</h3>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Health checks individuales</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8081/actuator/health  <span class="co"># MS-Estudiantes</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8082/actuator/health  <span class="co"># MS-Cursos</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8083/actuator/health  <span class="co"># MS-Matrículas</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/actuator/health  <span class="co"># API Gateway</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># O usar el script de estado</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="ex">./status.sh</span></span></code></pre></div>
+<h3 id="urls-de-los-servicios">URLs de los Servicios</h3>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>URL</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API Gateway</td>
+<td>http://localhost:8080</td>
+<td>Punto de entrada principal</td>
+</tr>
+<tr>
+<td>MS-Estudiantes</td>
+<td>http://localhost:8081</td>
+<td>Acceso directo</td>
+</tr>
+<tr>
+<td>MS-Cursos</td>
+<td>http://localhost:8082</td>
+<td>Acceso directo</td>
+</tr>
+<tr>
+<td>MS-Matrículas</td>
+<td>http://localhost:8083</td>
+<td>Acceso directo</td>
+</tr>
+<tr>
+<td>Frontend React</td>
+<td>http://localhost:5173</td>
+<td>UI de prueba</td>
+</tr>
+</tbody>
+</table>
+<h3 id="consolas-h2-base-de-datos">Consolas H2 (Base de Datos)</h3>
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>URL</th>
+<th>JDBC URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estudiantes</td>
+<td>http://localhost:8081/h2-console</td>
+<td><code>jdbc:h2:mem:estudiantesdb</code></td>
+</tr>
+<tr>
+<td>Cursos</td>
+<td>http://localhost:8082/h2-console</td>
+<td><code>jdbc:h2:mem:cursosdb</code></td>
+</tr>
+<tr>
+<td>Matrículas</td>
+<td>http://localhost:8083/h2-console</td>
+<td><code>jdbc:h2:mem:matriculasdb</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Nota:</strong> Usuario: <code>sa</code>, Password: vacío</p>
+</blockquote>
+<hr />
+<h2 id="api-endpoints">📡 API Endpoints</h2>
+<p>Todos los endpoints están versionados con <code>/api/v1/</code> y
+disponibles a través del <strong>API Gateway</strong> (puerto 8080).</p>
+<h3 id="estudiantes-apiv1students">👨‍🎓 Estudiantes
+(<code>/api/v1/students</code>)</h3>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 27%" />
+<col style="width: 35%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descripción</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/students</code></td>
+<td>Listar todos los estudiantes</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/students/{id}</code></td>
+<td>Obtener estudiante por ID</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/v1/students</code></td>
+<td>Crear nuevo estudiante</td>
+<td><code>StudentCreateRequest</code></td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td><code>/api/v1/students/{id}/status</code></td>
+<td>Actualizar estado</td>
+<td><code>StatusUpdateRequest</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplos:</strong></p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear estudiante</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:8080/api/v1/students <span class="dt">\</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="dt">\</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">&#39;{</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;firstName&quot;: &quot;Juan&quot;,</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;lastName&quot;: &quot;Pérez&quot;,</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;email&quot;: &quot;juan.perez@universidad.edu&quot;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="st">  }&#39;</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar todos</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/v1/students</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener por ID</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/v1/students/1</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiar estado a INACTIVE</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> PATCH http://localhost:8080/api/v1/students/1/status <span class="dt">\</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="dt">\</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">&#39;{&quot;status&quot;: &quot;INACTIVE&quot;}&#39;</span></span></code></pre></div>
+<p><strong>Estados de Estudiante:</strong> <code>ACTIVE</code>,
+<code>INACTIVE</code>, <code>GRADUATED</code>,
+<code>SUSPENDED</code></p>
+<h3 id="cursos-apiv1courses">📚 Cursos
+(<code>/api/v1/courses</code>)</h3>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 27%" />
+<col style="width: 35%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descripción</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/courses</code></td>
+<td>Listar todos los cursos</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/courses/{id}</code></td>
+<td>Obtener curso por ID</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/v1/courses</code></td>
+<td>Crear nuevo curso</td>
+<td><code>CourseCreateRequest</code></td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td><code>/api/v1/courses/{id}/status</code></td>
+<td>Actualizar estado</td>
+<td><code>StatusUpdateRequest</code></td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td><code>/api/v1/courses/{id}/capacity</code></td>
+<td>Actualizar capacidad</td>
+<td><code>CapacityUpdateRequest</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplos:</strong></p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear curso</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:8080/api/v1/courses <span class="dt">\</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="dt">\</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">&#39;{</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;name&quot;: &quot;Programación Orientada a Objetos&quot;,</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;description&quot;: &quot;Fundamentos de POO con Java 21&quot;,</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;capacity&quot;: 30</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="st">  }&#39;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar todos</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/v1/courses</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener por ID</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/v1/courses/1</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiar estado</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> PATCH http://localhost:8080/api/v1/courses/1/status <span class="dt">\</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="dt">\</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">&#39;{&quot;status&quot;: &quot;INACTIVE&quot;}&#39;</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Actualizar capacidad</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> PATCH http://localhost:8080/api/v1/courses/1/capacity <span class="dt">\</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="dt">\</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">&#39;{&quot;capacity&quot;: 40}&#39;</span></span></code></pre></div>
+<p><strong>Estados de Curso:</strong> <code>ACTIVE</code>,
+<code>INACTIVE</code>, <code>FINISHED</code></p>
+<h3 id="matrículas-apiv1enrollments">📝 Matrículas
+(<code>/api/v1/enrollments</code>)</h3>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 27%" />
+<col style="width: 35%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descripción</th>
+<th>Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/enrollments</code></td>
+<td>Listar todas las matrículas</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/enrollments?studentId={id}</code></td>
+<td>Filtrar por estudiante</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/enrollments?courseId={id}</code></td>
+<td>Filtrar por curso</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/enrollments/{id}</code></td>
+<td>Obtener matrícula por ID</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/v1/enrollments</code></td>
+<td>Crear nueva matrícula</td>
+<td><code>EnrollmentCreateRequest</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplos:</strong></p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear matrícula (requiere estudiante y curso existentes)</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:8080/api/v1/enrollments <span class="dt">\</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="dt">\</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">&#39;{</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;studentId&quot;: 1,</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;courseId&quot;: 1</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="st">  }&#39;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar todas</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/v1/enrollments</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar por estudiante</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="st">&quot;http://localhost:8080/api/v1/enrollments?studentId=1&quot;</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar por curso</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="st">&quot;http://localhost:8080/api/v1/enrollments?courseId=1&quot;</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener por ID</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8080/api/v1/enrollments/1</span></code></pre></div>
+<p><strong>Validaciones al crear matrícula:</strong> 1. ✅ Estudiante
+debe existir y estar <code>ACTIVE</code> 2. ✅ Curso debe existir y
+estar <code>ACTIVE</code> 3. ✅ Curso debe tener capacidad disponible 4.
+✅ No debe existir matrícula duplicada (mismo estudiante + curso)</p>
+<hr />
+<h2 id="testing-1">🧪 Testing</h2>
+<h3 id="resumen-de-tests">Resumen de Tests</h3>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Tests Unitarios</th>
+<th>Tests Integración</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ms-estudiantes</td>
+<td>8</td>
+<td>5</td>
+<td>13</td>
+</tr>
+<tr>
+<td>ms-cursos</td>
+<td>5</td>
+<td>6</td>
+<td>11</td>
+</tr>
+<tr>
+<td>ms-matriculas</td>
+<td>6</td>
+<td>6</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>19</strong></td>
+<td><strong>17</strong></td>
+<td><strong>36</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejecutar-tests">Ejecutar Tests</h3>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Todos los tests</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> test</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Solo tests de un módulo</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> test <span class="at">-pl</span> ms-estudiantes</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests de integración</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> verify</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Con reporte de cobertura</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> test jacoco:report</span></code></pre></div>
+<h3 id="ver-reportes-de-cobertura">Ver Reportes de Cobertura</h3>
+<p>Después de ejecutar <code>mvn test jacoco:report</code>, los reportes
+están en:</p>
+<pre><code>ms-estudiantes/target/site/jacoco/index.html
+ms-cursos/target/site/jacoco/index.html
+ms-matriculas/target/site/jacoco/index.html</code></pre>
+<h3 id="estructura-de-tests">Estructura de Tests</h3>
+<pre><code>src/test/java/com/academic/{servicio}/
+├── controller/
+│   └── {Entity}ControllerTest.java      # Tests unitarios del controller
+├── service/
+│   └── {Entity}ServiceTest.java         # Tests unitarios del service
+└── integration/
+    └── {Entity}IntegrationTest.java     # Tests de integración E2E</code></pre>
+<hr />
+<h2 id="frontend">💻 Frontend</h2>
+<p>El proyecto incluye un frontend de ejemplo construido con
+<strong>React + Vite + Tailwind CSS</strong>.</p>
+<h3 id="iniciar-frontend">Iniciar Frontend</h3>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> frontend-example</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install      <span class="co"># Solo la primera vez</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run dev      <span class="co"># Iniciar servidor de desarrollo</span></span></code></pre></div>
+<p>Acceder a http://localhost:5173</p>
+<h3 id="características-del-frontend">Características del Frontend</h3>
+<ul>
+<li>📋 <strong>Gestión de Estudiantes</strong>: Crear, listar y cambiar
+estado</li>
+<li>📚 <strong>Gestión de Cursos</strong>: Crear y listar cursos</li>
+<li>📝 <strong>Gestión de Matrículas</strong>: Inscribir estudiantes en
+cursos</li>
+<li>🎨 <strong>UI moderna</strong> con Tailwind CSS</li>
+<li>🔄 <strong>Comunicación con API Gateway</strong> en puerto 8080</li>
+</ul>
+<h3 id="estructura-del-frontend">Estructura del Frontend</h3>
+<pre><code>frontend-example/
+├── src/
+│   ├── api/
+│   │   └── index.js          # Cliente API (fetch)
+│   ├── components/
+│   │   ├── Students.jsx      # Componente de estudiantes
+│   │   ├── Courses.jsx       # Componente de cursos
+│   │   └── Enrollments.jsx   # Componente de matrículas
+│   ├── App.jsx               # Componente principal con tabs
+│   └── main.jsx              # Entry point
+├── package.json
+└── vite.config.js</code></pre>
+<hr />
+<h2 id="docker">🐳 Docker</h2>
+<h3 id="archivos-de-configuración">Archivos de Configuración</h3>
+<pre><code>├── docker-compose.yml           # Orquestación de servicios
+├── api-gateway/Dockerfile       # Imagen del Gateway
+├── ms-estudiantes/Dockerfile    # Imagen de Estudiantes
+├── ms-cursos/Dockerfile         # Imagen de Cursos
+├── ms-matriculas/Dockerfile     # Imagen de Matrículas
+└── .dockerignore                # Archivos ignorados</code></pre>
+<h3 id="comandos-docker">Comandos Docker</h3>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construir e iniciar todos los servicios</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">--build</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Iniciar en background</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">-d</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver logs</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> logs <span class="at">-f</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver logs de un servicio específico</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> logs <span class="at">-f</span> ms-estudiantes</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Detener servicios</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> down</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Detener y eliminar volúmenes</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> down <span class="at">-v</span></span></code></pre></div>
+<h3 id="puertos-expuestos">Puertos Expuestos</h3>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Puerto Host</th>
+<th>Puerto Container</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api-gateway</td>
+<td>8080</td>
+<td>8080</td>
+</tr>
+<tr>
+<td>ms-estudiantes</td>
+<td>8081</td>
+<td>8081</td>
+</tr>
+<tr>
+<td>ms-cursos</td>
+<td>8082</td>
+<td>8082</td>
+</tr>
+<tr>
+<td>ms-matriculas</td>
+<td>8083</td>
+<td>8083</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="documentación">📖 Documentación</h2>
+<h3 id="documentos-del-proyecto">Documentos del Proyecto</h3>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 37%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Descripción</th>
+<th>Ubicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>README.md</strong></td>
+<td>Este documento</td>
+<td><code>./README.md</code></td>
+</tr>
+<tr>
+<td><strong>PLANNING.md</strong></td>
+<td>Plan de proyecto y arquitectura</td>
+<td><code>./PLANNING.md</code></td>
+</tr>
+<tr>
+<td><strong>DESIGN.md</strong></td>
+<td>Diseño técnico detallado</td>
+<td><code>./docs/DESIGN.md</code></td>
+</tr>
+<tr>
+<td><strong>SUSTENTACION.md</strong></td>
+<td>Guía para sustentación</td>
+<td><code>./docs/SUSTENTACION.md</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="diagramas-uml-plantuml">Diagramas UML (PlantUML)</h3>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 40%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th>Diagrama</th>
+<th>Descripción</th>
+<th>Archivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arquitectura</td>
+<td>Visión general del sistema</td>
+<td><code>docs/diagrams/architecture.puml</code></td>
+</tr>
+<tr>
+<td>Clases</td>
+<td>Diagrama de clases UML</td>
+<td><code>docs/diagrams/class-diagram.puml</code></td>
+</tr>
+<tr>
+<td>Secuencia</td>
+<td>Flujo de creación de matrícula</td>
+<td><code>docs/diagrams/sequence-diagram.puml</code></td>
+</tr>
+</tbody>
+</table>
+<p>Los diagramas exportados en PNG están en:
+<code>docs/diagrams/output/</code></p>
+<h3 id="colección-postman">Colección Postman</h3>
+<p><strong>Ubicación:</strong>
+<code>docs/postman/academic-system.postman_collection.json</code></p>
+<p>Contiene <strong>12 requests</strong> organizados por servicio:</p>
+<pre><code>📁 Academic System API
+├── 📁 Students (4 requests)
+│   ├── Create Student
+│   ├── Get All Students
+│   ├── Get Student by ID
+│   └── Update Student Status
+├── 📁 Courses (5 requests)
+│   ├── Create Course
+│   ├── Get All Courses
+│   ├── Get Course by ID
+│   ├── Update Course Status
+│   └── Update Course Capacity
+└── 📁 Enrollments (3 requests)
+    ├── Create Enrollment
+    ├── Get All Enrollments
+    └── Get Enrollment by ID</code></pre>
+<p><strong>Importar en Postman:</strong> 1. Abrir Postman 2. File →
+Import 3. Seleccionar
+<code>docs/postman/academic-system.postman_collection.json</code></p>
+<hr />
+<h2 id="observabilidad">🔍 Observabilidad</h2>
+<h3 id="health-checks">Health Checks</h3>
+<p>Todos los servicios exponen el endpoint
+<code>/actuator/health</code>:</p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar salud de todos los servicios</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> http://localhost:8080/actuator/health <span class="kw">|</span> <span class="ex">jq</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> http://localhost:8081/actuator/health <span class="kw">|</span> <span class="ex">jq</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> http://localhost:8082/actuator/health <span class="kw">|</span> <span class="ex">jq</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> http://localhost:8083/actuator/health <span class="kw">|</span> <span class="ex">jq</span></span></code></pre></div>
+<p><strong>Respuesta esperada:</strong></p>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;UP&quot;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h3 id="correlation-id">Correlation ID</h3>
+<p>Todas las peticiones incluyen un header <code>X-Correlation-Id</code>
+para <strong>trazabilidad distribuida</strong>:</p>
+<ol type="1">
+<li>El cliente envía una petición al Gateway</li>
+<li>El Gateway genera un <code>X-Correlation-Id</code> único (UUID)</li>
+<li>El ID se propaga a todos los microservicios downstream</li>
+<li>Todos los logs incluyen el Correlation ID</li>
+</ol>
+<h3 id="logs">Logs</h3>
+<p>Los logs se almacenan en la carpeta <code>logs/</code>:</p>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver todos los logs en tiempo real</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> logs/<span class="pp">*</span>.log</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver logs de un servicio específico</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> logs/ms-estudiantes.log</span></code></pre></div>
+<hr />
+<h2 id="troubleshooting">🛠️ Troubleshooting</h2>
+<h3 id="puerto-ya-en-uso">Puerto ya en uso</h3>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Encontrar proceso usando el puerto</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lsof</span> <span class="at">-i</span> :8080</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Matar proceso</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> <span class="op">&lt;</span>PID<span class="op">&gt;</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># O usar el script de stop</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="ex">./stop-all.sh</span></span></code></pre></div>
+<h3 id="servicio-no-inicia">Servicio no inicia</h3>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver logs del servicio</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-100</span> logs/ms-{servicio}.log</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar que las dependencias compilaron</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean install <span class="at">-pl</span> common,ms-{servicio}</span></code></pre></div>
+<h3 id="error-de-conexión-entre-servicios">Error de conexión entre
+servicios</h3>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar que todos los servicios están UP</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./status.sh</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar conectividad</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8081/actuator/health</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8082/actuator/health</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:8083/actuator/health</span></code></pre></div>
+<h3 id="base-de-datos-h2">Base de datos H2</h3>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Acceder a la consola H2</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># URL: http://localhost:808X/h2-console</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># JDBC URL: jdbc:h2:mem:{nombredb}</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># User: sa</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Password: (vacío)</span></span></code></pre></div>
+<hr />
+<h2 id="métricas-del-proyecto">📊 Métricas del Proyecto</h2>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Líneas de código</strong></td>
+<td>~3,500</td>
+</tr>
+<tr>
+<td><strong>Archivos Java</strong></td>
+<td>~50</td>
+</tr>
+<tr>
+<td><strong>Módulos Maven</strong></td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Tests totales</strong></td>
+<td>36</td>
+</tr>
+<tr>
+<td><strong>Cobertura estimada</strong></td>
+<td>&gt;70%</td>
+</tr>
+<tr>
+<td><strong>Endpoints REST</strong></td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>Patrones de diseño</strong></td>
+<td>3 (Strategy, Template Method, Repository)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mejoras-futuras">🚀 Mejoras Futuras</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Agregar <strong>Spring
+Security</strong> con JWT</label></li>
+<li><label><input type="checkbox" />Implementar <strong>Service
+Discovery</strong> (Eureka)</label></li>
+<li><label><input type="checkbox" />Agregar <strong>Config
+Server</strong> centralizado</label></li>
+<li><label><input type="checkbox" />Implementar <strong>Circuit
+Breaker</strong> (Resilience4j)</label></li>
+<li><label><input type="checkbox" />Migrar a <strong>PostgreSQL</strong>
+para producción</label></li>
+<li><label><input type="checkbox" />Agregar
+<strong>Swagger/OpenAPI</strong> para documentación
+automática</label></li>
+<li><label><input type="checkbox" />Implementar <strong>mensajería
+asíncrona</strong> (RabbitMQ/Kafka)</label></li>
+<li><label><input type="checkbox" />Agregar <strong>métricas</strong>
+con Micrometer + Prometheus</label></li>
+<li><label><input type="checkbox" />Implementar <strong>caching</strong>
+con Redis</label></li>
+</ul>
+<hr />
+<h2 id="autores">👨‍💻 Autores</h2>
+<p><strong>Diego López</strong></p>
+<p>Proyecto desarrollado como parte de la <strong>Actividad de
+Homologación</strong> para el curso de Programación Orientada a
+Objetos.</p>
+<hr />
+<h2 id="licencia">📝 Licencia</h2>
+<p>Este proyecto es de uso académico. Desarrollado para la
+<strong>Universidad</strong> como demostración de competencias en:</p>
+<ul>
+<li>Programación Orientada a Objetos</li>
+<li>Principios SOLID</li>
+<li>Patrones de Diseño</li>
+<li>Arquitectura de Microservicios</li>
+<li>Java 21 y Spring Boot 3</li>
+</ul>
+<hr />
+<p align="center">
+<b>Hecho con ❤️ usando Java 21 + Spring Boot 3</b>
+</p>
+<hr />
+<p><br/></p>
+<p align="center">
+<a href="https://dlsoft.dev">
+<img src="https://img.shields.io/badge/DL-SOFT-0066FF?style=for-the-badge&labelColor=000000&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzAwNjZGRiIgZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgMThjLTQuNDEgMC04LTMuNTktOC04czMuNTktOCA4LTggOCAzLjU5IDggOC0zLjU5IDgtOCA4eiIvPjxwYXRoIGZpbGw9IiMwMDY2RkYiIGQ9Ik0xMiA2Yy0zLjMxIDAtNiAyLjY5LTYgNnMyLjY5IDYgNiA2IDYtMi42OSA2LTYtMi42OS02LTYtNnptMCAxMGMtMi4yMSAwLTQtMS43OS00LTRzMS43OS00IDQtNCA0IDEuNzkgNCA0LTEuNzkgNC00IDR6Ii8+PC9zdmc+" alt="DL Soft" height="40"/>
+</a>
+</p>
+<h2 align="center">
+<a href="https://dlsoft.dev">🚀 DL Soft</a>
+</h2>
+<h3 align="center">
+<i>Creamos Experiencias Digitales Inteligentes</i>
+</h3>
+<p align="center">
+Diseñamos y desarrollamos soluciones de software a medida que se adaptan
+a tus necesidades y ayudan a tu negocio a crecer.
+</p>
+<p align="center">
+<a href="https://dlsoft.dev"><img src="https://img.shields.io/badge/🌐_Website-dlsoft.dev-0066FF?style=for-the-badge" alt="Website"/></a>
+<a href="https://wa.me/17038562045"><img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp"/></a>
+<a href="https://www.linkedin.com/in/diegolopezcamacho/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+<a href="https://instagram.com/dl_soft"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/></a>
+<a href="https://github.com/diegolopezrm"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
+</p>
+<h3 id="lo-que-construimos">🛠️ Lo Que Construimos</h3>
+<table align="center">
+<tr>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" width="40"/><br/>
+<b>Apps Móviles</b><br/> <sub>Flutter &amp; React Native</sub>
+</td>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40"/><br/>
+<b>Aplicaciones Web</b><br/> <sub>React &amp; Next.js</sub>
+</td>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40"/><br/>
+<b>Sistemas Backend</b><br/> <sub>Node.js &amp; Python</sub>
+</td>
+<td align="center" width="150">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" width="40"/><br/>
+<b>Soluciones IA</b><br/> <sub>Machine Learning</sub>
+</td>
+</tr>
+</table>
+<h3 id="nuestros-números">📊 Nuestros Números</h3>
+<p align="center">
+<img src="https://img.shields.io/badge/Proyectos_Entregados-30+-success?style=flat-square" alt="Proyectos"/>
+<img src="https://img.shields.io/badge/Clientes_Satisfechos-30+-blue?style=flat-square" alt="Clientes"/>
+<img src="https://img.shields.io/badge/Años_de_Experiencia-5+-orange?style=flat-square" alt="Años"/>
+<img src="https://img.shields.io/badge/Satisfacción-100%25-brightgreen?style=flat-square" alt="Satisfacción"/>
+</p>
+<h3 id="industrias-que-transformamos">🏭 Industrias que
+Transformamos</h3>
+<p align="center">
+⚖️ Legal &amp; Notarial • 🏥 Salud • 🛡️ Seguridad • 📦 Logística • 💰
+Fintech • ⚽ Deportes • 🌍 Viajes • ⛪ Comunidades • 🌸 Agricultura
+</p>
+<hr />
+<p align="center">
+<b>¿Tienes un proyecto en mente?</b><br/>
+<a href="https://dlsoft.dev/#contact">
+<img src="https://img.shields.io/badge/📩_Contáctanos-Consulta_Gratis-FF6B6B?style=for-the-badge" alt="Contacto"/>
+</a>
+</p>
+<p align="center">
+<sub> <b>DL SOFT TECHNOLOGIES S.A.S.</b><br/> NIT: 902024441-0 •
+Bucaramanga, Colombia 🇨🇴<br/> 📧 admin@dlsoft.dev • 📱 +1 (703) 856-2045
+</sub>
+</p>
+<p align="center">
+<sub>© DL SOFT TECHNOLOGIES S.A.S. Todos los derechos reservados.</sub>
+</p>
+</body>
+</html>

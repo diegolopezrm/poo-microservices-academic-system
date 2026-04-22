@@ -1,0 +1,66 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      # Rutas hacia los microservicios
+      routes:
+        # MS Estudiantes
+        - id: ms-estudiantes
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/students/**
+
+        # MS Cursos
+        - id: ms-cursos
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/courses/**
+
+        # MS Matrículas
+        - id: ms-matriculas
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/enrollments/**
+
+      # Configuración global
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+
+      # CORS global
+      globalcors:
+        cors-configurations:
+          "[/**]":
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,gateway
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
+
+# Logging Configuration
+logging:
+  level:
+    com.academic.gateway: DEBUG
+    org.springframework.cloud.gateway: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"

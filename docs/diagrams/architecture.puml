@@ -1,0 +1,87 @@
+@startuml architecture
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam componentStyle rectangle
+
+title Sistema Académico - Arquitectura de Microservicios
+
+actor "Cliente\n(Postman/Frontend)" as Client
+
+package "API Gateway" {
+    component "Spring Cloud Gateway\n:8080" as Gateway {
+        component "CorrelationIdFilter" as CorrFilter
+        component "LoggingFilter" as LogFilter
+        component "RouteConfig" as Routes
+    }
+}
+
+package "Microservicios" {
+    package "MS-Estudiantes :8081" {
+        component "StudentController" as SC
+        component "StudentService" as SS
+        database "H2 - estudiantes_db" as DB1
+    }
+
+    package "MS-Cursos :8082" {
+        component "CourseController" as CC
+        component "CourseService" as CS
+        database "H2 - cursos_db" as DB2
+    }
+
+    package "MS-Matrículas :8083" {
+        component "EnrollmentController" as EC
+        component "EnrollmentService" as ES
+        component "ValidationStrategies" as VS
+        database "H2 - matriculas_db" as DB3
+    }
+}
+
+package "Módulo Común" {
+    component "BaseException" as BE
+    component "GlobalExceptionHandler" as GEH
+    component "DTOs Compartidos" as DTOs
+}
+
+' Relaciones principales
+Client --> Gateway : HTTP REST
+Gateway --> SC : /api/v1/students/**
+Gateway --> CC : /api/v1/courses/**
+Gateway --> EC : /api/v1/enrollments/**
+
+SC --> SS
+SS --> DB1
+
+CC --> CS
+CS --> DB2
+
+EC --> ES
+ES --> VS : valida con
+ES --> DB3
+
+' Comunicación inter-servicios
+ES ..> SS : REST Client\n(obtener estudiante)
+ES ..> CS : REST Client\n(obtener curso)
+
+' Uso del módulo común
+SC ..|> GEH : usa
+CC ..|> GEH : usa
+EC ..|> GEH : usa
+
+note right of VS
+  **Strategy Pattern**
+  - StudentActiveValidation
+  - CourseActiveValidation
+  - CourseCapacityValidation
+  - DuplicateEnrollmentValidation
+end note
+
+note bottom of ES
+  **Template Method Pattern**
+  1. fetchStudentData()
+  2. fetchCourseData()
+  3. executeValidations()
+  4. createAndSaveEnrollment()
+  5. postProcessEnrollment()
+end note
+
+@enduml
